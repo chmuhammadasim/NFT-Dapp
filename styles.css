@@ -1,0 +1,181 @@
+/* Resetting default styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Header styles */
+header {
+    background-color: #c9c7d1;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+    transition: background-color 0.3s ease; /* Adding transition effect */
+    cursor: pointer; /* Cursor style on hover */
+}
+
+/* Hover effect */
+header:hover {
+    background-color: #4b474e; /* Darker background on hover */
+}
+
+/* Header content styles */
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+header p { 
+    font-size: 1.2em;
+}
+
+/* Main container styles */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+    max-width: 800px;
+}
+
+/* Upload section styles */
+.upload-section {
+    margin-bottom: 2em;
+    background-color: #fafafa;
+    padding: 1.5em;
+    border-radius: 0.5em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.upload-section input[type="file"] {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 0.5em;
+    margin-right: 1em;
+}
+
+.upload-section button[type="button"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.upload-section button[type="button"]:hover {
+    background-color: #3e8e41;
+}
+
+/* NFT list section styles */
+.nft-list-section {
+    margin-top: 2em;
+}
+
+.nft-list-section h2 {
+    margin-top: 0;
+}
+
+/* NFT list styles */
+#nft-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#nft-list div {
+    margin: 1em;
+    width: 200px;
+    height: 200px;
+    border: 2px solid #1d0668;
+    border-radius: 0.5em;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#nft-list img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nft-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 0.5em;
+    text-align: center;
+    font-size: 0.8em;
+}
+
+/* Hover effect on NFT list items */
+#nft-list div:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Hover effect on NFT captions */
+.nft-caption:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+/* Hover effect on NFT list items */
+#nft-list div:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Hover effect on NFT captions */
+.nft-caption:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect on upload button */
+#upload-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for header hover */
+header:hover {
+    background-color: #4b474e; /* Darker background on hover */
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect on header content */
+header h1:hover {
+    color: #ff7f50; /* Change text color on hover */
+}
+
+/* Hover effect on main container */
+main:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+}
+
+/* Hover effect on file input */
+.upload-section input[type="file"]:hover {
+    border-color: #4CAF50; /* Change border color on hover */
+}
+
+/* Hover effect on file input button */
+.upload-section button[type="button"]:hover {
+    background-color: #3e8e41;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

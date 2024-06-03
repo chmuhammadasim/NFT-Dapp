@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFT Display</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>NFT Display</h1>
+    </header>
+    <main>
+        <section class="upload-section">
+            <input type="file" id="file-input">
+            <button id="upload-button">Upload NFT</button>
+            <div id="output"></div>
+        </section>
+        <section class="nft-list-section">
+            <h2>NFTs Gallery</h2>
+            <div id="nft-list"></div>
+        </section>
+    </main>
+
+    <script>
+        const PINATA_API_KEY = 'e93b226ad0b51942727d';
+        const PINATA_SECRET_KEY = '2d4cff9cfa5d284948cb3de15b7432b493558280eeb3f960d046fdc2c37db81a';
+
+        const uploadNft = async () => {
+            const fileInput = document.getElementById('file-input');
+            const file = fileInput.files[0];
+            if (!file) {
+                console.error('No file selected');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await axios.post(
+                    'https://api.pinata.cloud/pinning/pinFileToIPFS',
+                    formData,
+                    {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            'pinata_api_key': PINATA_API_KEY,
+                            'pinata_secret_api_key': PINATA_SECRET_KEY
+                        }
+                    }
+                );
+                return response.data;
+            } catch (error) {
+                console.error('Error uploading file:', error);
+                return false;
+            }
+        };
+
+        const viewUploadedNFTs = async () => {
+    try {
+        const response = await axios.get(
+            'https://api.pinata.cloud/data/pinList?status=pinned',
+            {
+                headers: {
+                    'pinata_api_key': PINATA_API_KEY,
+                    'pinata_secret_api_key': PINATA_SECRET_KEY
+                }
+            }
+        );
+        console.log('Response from pinata:', response.data);
+        const uploadedNFTs = response.data.rows.filter(row => row.ipfs_pin_hash.startsWith('Qm'));
+        console.log('Uploaded NFTs:', uploadedNFTs);
+        return uploadedNFTs;
+    } catch (error) {
+        console.error('Error fetching uploaded NFTs:', error);
+        return [];
+    }
+};
+
+
+        const renderUploadedNFTs = async () => {
+            const nftList = document.getElementById('nft-list');
+            nftList.innerHTML = '';
+
+            const uploadedNFTs = await viewUploadedNFTs();
+            console.log('Uploaded NFTs:', uploadedNFTs);
+            uploadedNFTs.forEach(nft => {
+                const div = document.createElement('div');
+                const img = document.createElement('img');
+                img.src = `https://gateway.pinata.cloud/ipfs/${nft.ipfs_pin_hash}`;
+                div.appendChild(img);
+                nftList.appendChild(div);
+            });
+        };
+
+        document.getElementById('upload-button').addEventListener('click', async () => {
+            const imageData = await uploadNft();
+            if (imageData) {
+                console.log('Image uploaded:', imageData);
+                document.getElementById('output').textContent = 'NFT uploaded successfully!';
+                renderUploadedNFTs();
+            } else {
+                console.error('Failed to upload image');
+                document.getElementById('output').textContent = 'Failed to upload NFT image';
+            }
+        });
+
+        window.onload = () => {
+            renderUploadedNFTs();
+        };
+    </script>
+</body>
+</html>
